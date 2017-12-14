@@ -1,0 +1,47 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      Evaluación de la calidad de las cerezas
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">Estimación de calidad de cerezas</h4>
+      <p class="card-text">Suba una fotografía de las cerezas sobre la bandeja.</p>
+      <div class="form-group">
+        <label for="photoInput">Subir archivo:</label>
+        <input
+          id="fileInput"
+          #fileInput
+          type="file"
+          class="form-control-file"
+          aria-describedby="photoHelp"
+          accept="image/*,capture=camera" capture="camera"
+          (change)="imageChange($event)">
+        <small
+          id="photoHelp"
+          class="form-text text-muted">
+          Seleccione un archivo de imagen o tome una fotografía de la bandeja con las cerezas.
+        </small>
+        <button type="button" (click)="uploadPhoto()" class="btn btn-primary">Subir Imagen</button>
+      </div>
+
+      <div class="card card-inverse bg-success p-2" *ngIf="results">
+        <h4 class="card-title">Resultados</h4>
+        <p class="card-text">Se detectaron {{ results.cherries }} cerezas.</p>
+        <div class="card-columns">
+          <div class="card text-dark" *ngFor="let result of results.results">
+            <img class="cherry-result-img mx-auto mt-2 d-block img-thumbnail rounded" src="{{baseURL}}/{{result.filename}}" alt="Cherry Image">
+            <div class="card-block">
+              <p class="card-text">Categoría: {{result.class}}</p>
+              <p class="card-text">Calibre: {{result.caliber | number : '1.2-2'}} cms.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-danger text-white p-2" *ngIf="error">
+        <h4 class="card-title">Error</h4>
+        <p class="card-text">{{ error | json }}</p>
+      </div>
+
+    </div>
+  </div>
+</div>
