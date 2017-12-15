@@ -97,7 +97,12 @@ async def post_handler(request):
       filenames.append(filename)
       caliber.append(radius_list[pos]* 2 * pix_scale);
       cherry_classes.append(getClassFromImage(cv2.cvtColor(cherry,cv2.COLOR_BGR2RGB)))
-    results = [{"filename": "http://" + request.host + "/" + f, "class": c, "caliber": s} for f, c, s in zip(filenames, cherry_classes, caliber)]
+    if(true):
+      directory = "/cerezas"
+    else:
+      directory = ""
+
+    results = [{"filename": "http://" + request.host + directory + "/" + f, "class": c, "caliber": s} for f, c, s in zip(filenames, cherry_classes, caliber)]
     return json(
         {
           'message'  : 'Image uploaded successfully.',
@@ -106,7 +111,7 @@ async def post_handler(request):
           'type'     : image_filetype,
           'results'  : results,
           'cherries' : len(segmented_cherries),
-          'result'   : request.host + '/' + image_output
+          'result'   : request.host + directory + '/' + image_output
         },
         headers={'X-Served-By': 'sanic'},
         status=200
