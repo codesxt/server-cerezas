@@ -97,7 +97,7 @@ async def post_handler(request):
       filenames.append(filename)
       caliber.append(radius_list[pos]* 2 * pix_scale);
       cherry_classes.append(getClassFromImage(cv2.cvtColor(cherry,cv2.COLOR_BGR2RGB)))
-    if(true):
+    if(True):
       directory = "/cerezas"
     else:
       directory = ""
